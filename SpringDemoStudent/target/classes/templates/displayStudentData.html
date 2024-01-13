@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>STUDENT INFORMATION</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div align="center" >
+        <h1>STUDENT INFORMATION</h1>
+        <table class="table table-bordered table-striped table-hover" width="100%">
+            <tr>
+                <th>ROLL NUMBER</th>
+                <th>STUDENT NAME</th>
+                <th>CONTACT NUMBER</th>
+                <th>ADDRESS</th>
+                <th>TOTAL MARKS</th>
+                <th>OBTAINED MARKS</th>
+                <th>PERCENTAGE</th>
+                <th>OPERATION</th>
+            </tr>
+            <tr th:each="data:${studentData}" th:style="${((data.studentObtainMarks*100)/data.studentTotalMarks)>=35?'color:green':'color:red'}">
+                <td th:text="${data.studentRollNumber}"></td>
+                <td th:text="${data.studentName}"></td>
+                <td th:text="${data.studentContactNumber}"></td>
+                <td th:text="${data.studentAddress}"></td>
+                <td th:text="${data.studentTotalMarks}"></td>
+                <td th:text="${data.studentObtainMarks}"></td>
+                <td th:text="${(data.studentObtainMarks*100)/data.studentTotalMarks}"></td>
+                <td>
+                    <a th:href="@{/updateStudent/{id} (id=${data.studentRollNumber})}"><button class="btn btn-outline-primary">UPDATE</button></a>
+                    <a th:href="@{/deleteStudent/{id} (id=${data.studentRollNumber})}"><button class="btn btn-outline-primary">DELETE</button></a>
+                </td>
+            </tr>
+        </table>
+        <a href="/addStudent"><button class="btn btn-secondary">ADD STUDENT</button></a>
+    </div>
+</body>
+</html>
